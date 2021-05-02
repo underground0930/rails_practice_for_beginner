@@ -1,0 +1,28 @@
+<h1>Users#new</h1>
+<p>Find me in app/views/users/new.html.erb</p>
+<div class="container">
+
+<%= form_with model: @user do |f| %>
+  <div class="form-group">
+    <%= f.label :name %>
+    <%= f.text_field :name, class: 'form-control' %>
+  </div>
+
+  <div>
+    <%= f.label :email %>
+    <%= f.email_field :email %>
+  </div>
+
+  <div>
+    <%= f.label :password %>
+    <%= f.password_field :password %>
+  </div>
+
+  <div>
+    <%= f.label :password_confirmation %>
+    <%= f.password_field :password_confirmation %>
+  </div>
+  <%= f.submit class: 'btn btn-primary' %>
+
+<% end  %>
+</div>
