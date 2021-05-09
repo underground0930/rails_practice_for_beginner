@@ -1,4 +1,11 @@
 <div class="container">
+  <%= search_form_for @q do |f| %>
+
+    <%= f.label :title_cont %>
+    <%= f.search_field :title_or_body_or_answers_body_cont %>
+
+    <%= f.submit %>
+  <% end %>
   <ul>
   <% @questions.each do |question| %>
     <li>
