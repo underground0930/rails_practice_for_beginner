@@ -1,3 +1,20 @@
 質問タイトル<%= @question.title %>
 質問内容<%= @question.body %>
 質問者<%= @question.user.name %>
+
+回答
+<%= form_with model: [@question, Answer.new] do |f| %>
+  <%= f.text_area :body %>
+  <%= f.submit %>
+<% end %>
+<h2>回答一覧</h2>
+<ul>
+  <% @question.answers.each do |answer| %>
+    <li>
+      <%= answer.body %>
+      <% if answer.user_id == current_user.id %>
+        <%= link_to '削除', question_answer_path(@question, answer), method: :delete, data: { confirm: '削除しますか' } %>
+      <% end %>
+    </li>
+  <% end %>
+</ul>
