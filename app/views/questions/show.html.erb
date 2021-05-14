@@ -1,8 +1,16 @@
-質問タイトル<%= @question.title %>
-質問内容<%= @question.body %>
-質問者<%= @question.user.name %>
+<p>質問タイトル<%= @question.title %></p>
+<p>質問内容<%= @question.body %></p>
+<p>質問者<%= @question.user.name %></p>
 
-回答
+<% if @question.solved? %>
+  解決済み
+<% else %>
+  <% if @question.user_id == current_user.id %>
+    <%= link_to '解決済みにする', solve_question_path(@question), method: :post %>
+  <% end %>
+<% end %>
+
+<h2>回答</h2>
 <%= form_with model: [@question, Answer.new] do |f| %>
   <%= f.text_area :body %>
   <%= f.submit %>

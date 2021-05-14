@@ -1,4 +1,9 @@
 <div class="container">
+  <div>
+    <%= link_to '全て', questions_path %>
+    <%= link_to '未解決', unsolved_questions_path %>
+    <%= link_to '解決', solved_questions_path %>
+  </div>
   <%= search_form_for @q do |f| %>
 
     <%= f.label :title_cont %>
