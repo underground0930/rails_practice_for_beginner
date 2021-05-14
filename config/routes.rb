@@ -15,4 +15,6 @@ Rails.application.routes.draw do
     end
     resources :answers, only: [:create, :destroy]
   end
+
+  resources :users, only: [:index]
 end
