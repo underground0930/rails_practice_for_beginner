@@ -5,12 +5,14 @@ class QuestionsController < ApplicationController
   end
 
   def solved
-    @questions = Question.where(solved: true)
+    @q = Question.where(solved: true).ransack(params[:q])
+    @questions = @q.result(distinct: true)
     render :index
   end
 
   def unsolved
-    @questions = Question.where(solved: false)
+    @q = Question.where(solved: false).ransack(params[:q])
+    @questions = @q.result(distinct: true)
     render :index
   end
 
