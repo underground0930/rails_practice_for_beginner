@@ -1,29 +1,29 @@
-<div class="container">
-  <div>
-    <%= link_to '全て', questions_path %>
-    <%= link_to '未解決', unsolved_questions_path %>
-    <%= link_to '解決', solved_questions_path %>
-  </div>
-  <%= search_form_for @q, url: request.path do |f| %>
-
-    <%= f.label :title_cont %>
-    <%= f.search_field :title_or_body_or_answers_body_cont, class: 'form-control' %>
-
-    <%= f.submit class: 'btn btn-primary' %>
-  <% end %>
-  <ul>
-  <% @questions.each do |question| %>
-    <li>
-      <%= link_to question.title, question_path(question) %>
-      <% if current_user.present? %>
-        <% if question.user_id == current_user.id %>
-          <%= link_to '編集', edit_question_path(question), class: 'btn btn-success' %>
-          <%= link_to '削除', question_path(question), class: 'btn btn-danger', data: { confirm: '削除しますか' }, method: :delete %>
-        <% end %>
-      <% end %>
+<div class="container pt-5">
+  <ul class="nav nav-tabs nav-justified mb-3">
+    <li class="nav-item">
+      <%= link_to '全て', questions_path, class: "nav-link #{'active' if action_name == 'index'}" %>
     </li>
-  <% end %>
+    <li class="nav-item">
+      <%= link_to '未解決', unsolved_questions_path, class: "nav-link #{'active' if action_name == 'unsolved'}" %>
+    </li>
+    <li class="nav-item">
+      <%= link_to '解決', solved_questions_path, class: "nav-link #{'active' if action_name == 'solved'}" %>
+    </li>
   </ul>
-  <%= paginate @questions %>
+  <%= search_form_for @q, url: request.path, class: 'form-inline mb-5' do |f| %>
+    <div class="input-group w-100">
+      <%= f.search_field :title_or_body_or_answers_body_cont, class: 'form-control' %>
+      <div class="input-group-append">
+        <%= f.submit class: 'btn btn-primary' %>
+      </div>
+    </div>
+  <% end %>
+  <ul class="list-unstyled">
+    <%= render @questions %>
+  </ul>
+  <div class="d-flex justify-content-center">
+    <%= paginate @questions %>
+  </div>
+
 </div>
 

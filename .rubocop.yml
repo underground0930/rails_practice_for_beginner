@@ -1,0 +1,35 @@
+require:
+  - rubocop-rails
+AllCops:
+  NewCops: enable
+  DisplayCopNames: true
+  DisplayStyleGuide: true
+  StyleGuideBaseURL: https://github.com/fortissimo1997/ruby-style-guide/blob/japanese/README.ja.md
+  Exclude:
+    - 'db/migrate/*'
+    - 'node_modules/**/*'
+    - 'bin/*'
+    - 'db/schema.rb'
+    - 'vendor/bundle/**/*'
+    - 'tmp/**/*'
+    - 'lib/tasks/auto_annotate_models.rake'
+    - 'config/**/*'
+    - 'spec/**/*'
+
+Style/AsciiComments:
+  Enabled: false
+Style/ClassAndModuleChildren:
+  Enabled: false
+Style/Documentation:
+  Enabled: false
+Rails/UnknownEnv:
+  Environments:
+    - production
+    - development
+    - test
+    - staging
+Naming/PredicateName:
+  Enabled: false
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
