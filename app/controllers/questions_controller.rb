@@ -24,16 +24,20 @@ class QuestionsController < ApplicationController
     @question = Question.new
   end
 
+  # rubocop:disable Metrics/AbcSize
   def create
     @question = current_user.questions.build(question_params)
     if @question.save
-      User.all.each { |user| QuestionMailer.with(user: user, question: @question).question_created.deliver_later }
+      User.where.not(id: current_user.id).each do |user|
+        QuestionMailer.with(user: user, question: @question).question_created.deliver_later
+      end
       redirect_to question_path(@question), success: '質問を作成しました'
     else
       flash.now[:danger] = '失敗しました'
       render :new
     end
   end
+  # rubocop:enable Metrics/AbcSize
 
   def edit
     @question = current_user.questions.find(params[:id])
