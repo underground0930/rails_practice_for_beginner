@@ -1,9 +1,9 @@
 RSpec.configure do |config|
-  config.before(:each) do
-    driven_by :rack_test, screen_size: [1920, 1080]
-  end
-
   config.before(:each, type: :system) do
-    driven_by :selenium, using: :headless_chrome, screen_size: [1920, 1080]
+    # Capybara.reset_sessions!
+    driven_by :selenium, using: :headless_chrome, screen_size: [1000, 600] do |driver_options|
+      driver_options.add_argument('--disable-dev-sim-usage')
+      driver_options.add_argument('--no-sandbox')
+    end
   end
 end

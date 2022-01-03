@@ -1,0 +1,80 @@
+name: Test
+on: [push]
+jobs:
+  rspec:
+    runs-on: ubuntu-latest
+    container:
+      image: ruby:2.7.3
+      env:
+        RAILS_ENV: test
+    steps:
+      - uses: actions/checkout@v2
+      - name: bundler config
+        run: bundle config set path 'vendor/bundle'
+      - name: cache gems
+        id: cache-gems
+        uses: actions/cache@v2
+        with:
+          path: vendor/bundle
+          key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-gems-
+
+      - name: install chorme
+        run: |
+          wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | apt-key add -
+          echo 'deb http://dl.google.com/linux/chrome/deb/ stable main' | tee /etc/apt/sources.list.d/google-chrome.list
+          apt-get update -q -y
+          apt-get install -y google-chrome-stable
+      - name: setup bundle
+        if: steps.cache-gems.outputs.cache-hit != 'true'
+        run: |
+          bundle install --jobs 4 --retry 3
+      - name: setup yarn
+        run: |
+          curl -sL https://deb.nodesource.com/setup_14.x | bash -
+          apt-get install -y nodejs
+          npm install -g yarn
+      - name: cache yarn
+        uses: actions/cache@v2
+        id: yarn-cache
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+      - name: yarn install
+        if: steps.yarn-cache.outputs.cache-hit != 'true'
+        run: yarn install --check-files
+      - name: setup migrate
+        run: |
+          bundle exec rails db:create db:schema:load --trace
+      - name: run spec
+        run: bundle exec rspec
+      - name: Archive rspec result screenshots
+        if: failure()
+        uses: actions/upload-artifact@v1
+        with:
+          name: rspec result screenshots
+          path: tmp/screenshots/
+  rubocop:
+    runs-on: ubuntu-latest
+    container:
+      image: ruby:2.7.3
+    steps:
+      - uses: actions/checkout@v2
+      - name: bundler config
+        run: bundle config set path 'vendor/bundle'
+      - name: Cache gems
+        id: cache-gems
+        uses: actions/cache@v2
+        with:
+          path: vendor/bundle
+          key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-gems-
+      - name: setup bundle
+        if: steps.cache-gems.outputs.cache-hit != 'true'
+        run: bundle install --jobs 4 --retry 3
+      - name: run rubocop
+        run: bundle exec rubocop
