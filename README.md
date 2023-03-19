@@ -1,24 +1,10 @@
 # README
-
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+## 環境構築
+```
+$ docker compose build --no-cache
+$ docker compose run --rm web bin/setup
+$ docker compose up 
+```
+localhost:3000 にアクセス
+以下の画面が表示されるはずです。
+[![Image from Gyazo](https://i.gyazo.com/88de650b557c9d822b22563dc1588638.png)](https://gyazo.com/88de650b557c9d822b22563dc1588638)
