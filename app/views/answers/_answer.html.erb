@@ -1,0 +1,22 @@
+<li class="media mb-3 border-bottom pb-3" id="<%= dom_id(answer) %>">
+  <%= image_tag 'https://placehold.jp/64x64.png', class: 'mr-3 rounded-circle' %>
+  <div class="media-body">
+    <div class="d-flex flex-column justify-content-between">
+      <div>
+        <%= simple_format(answer.body) %>
+      </div>
+      <div class="text-right">
+        <% if current_user&.mine?(answer) %>
+          <div>
+            <%= link_to '削除', question_answer_path(answer.question, answer), class: 'btn btn-danger btn-sm', data: { confirm: '削除しますか' }, method: :delete %>
+          </div>
+        <% end %>
+        <span class="small text-muted"><%= l answer.created_at, format: :long %></span>
+      </div>
+
+
+    </div>
+
+
+  </div>
+</li>

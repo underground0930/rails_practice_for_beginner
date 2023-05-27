@@ -1,0 +1,24 @@
+ja:
+  views:
+    pagination:
+      first: '&laquo; First'
+      last: 'Last &raquo;'
+      previous: '&lsaquo; Prev'
+      next: 'Next &rsaquo;'
+      truncate: '&hellip;'
+  activerecord:
+    models:
+      user: ユーザー
+      question: 質問
+      answer: 回答
+    attributes:
+      user:
+        name: 名前
+        email: メールアドレス
+        password: パスワード
+        password_confirmation: パスワード確認
+      question:
+        title: タイトル
+        body: 質問内容
+      answer:
+        body: 回答内容

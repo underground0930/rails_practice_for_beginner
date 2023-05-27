@@ -1,0 +1,5 @@
+<tr>
+  <td><%= question.id %></td>
+  <td><%= question.title %></td>
+  <td><%= link_to '削除', admin_question_path(question), class: 'btn btn-danger btn-sm', method: :delete, data: { confirm: '削除しますか' } %></td>
+</tr>

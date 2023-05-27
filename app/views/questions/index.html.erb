@@ -1,0 +1,29 @@
+<div class="container pt-5">
+  <ul class="nav nav-tabs nav-justified mb-3">
+    <li class="nav-item">
+      <%= link_to '全て', questions_path, class: "nav-link #{'active' if action_name == 'index'}" %>
+    </li>
+    <li class="nav-item">
+      <%= link_to '未解決', unsolved_questions_path, class: "nav-link #{'active' if action_name == 'unsolved'}" %>
+    </li>
+    <li class="nav-item">
+      <%= link_to '解決', solved_questions_path, class: "nav-link #{'active' if action_name == 'solved'}" %>
+    </li>
+  </ul>
+  <%= search_form_for @q, url: request.path, class: 'form-inline mb-5' do |f| %>
+    <div class="input-group w-100">
+      <%= f.search_field :title_or_body_or_answers_body_cont, class: 'form-control' %>
+      <div class="input-group-append">
+        <%= f.submit class: 'btn btn-primary' %>
+      </div>
+    </div>
+  <% end %>
+  <ul class="list-unstyled">
+    <%= render @questions %>
+  </ul>
+  <div class="d-flex justify-content-center">
+    <%= paginate @questions %>
+  </div>
+
+</div>
+

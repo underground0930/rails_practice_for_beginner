@@ -1,0 +1,23 @@
+<li class="media mb-3 border-bottom pb-3">
+  <%= image_tag 'https://placehold.jp/64x64.png', class: 'mr-3 rounded-circle' %>
+  <div class="media-body">
+    <div class="d-flex">
+      <h5 class="mt-0 mb-1 mr-3"><%= link_to question.title, question_path(question) %></h5>
+      <div class="mr-3">
+      <% if question.solved? %>
+        <span class="badge badge-success">解決済み</span>
+      <% else %>
+        <span class="badge badge-danger">未解決</span>
+      <% end %>
+      </div>
+      <% if current_user&.mine?(question) %>
+        <div>
+          <%= link_to '編集', edit_question_path(question), class: 'btn btn-success btn-sm' %>
+          <%= link_to '削除', question_path(question), class: 'btn btn-danger btn-sm', data: { confirm: '削除しますか' }, method: :delete %>
+        </div>
+      <% end %>
+    </div>
+
+    <%= question.body.truncate(100) %>
+  </div>
+</li>
