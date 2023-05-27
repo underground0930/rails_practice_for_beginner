@@ -1,4 +1,8 @@
 class UsersController < ApplicationController
+  def index
+    @users = User.all
+  end
+
   def new
     @user = User.new
   end
@@ -11,10 +15,6 @@ class UsersController < ApplicationController
       flash.now[:danger] = 'サインアップに失敗しました'
       render :new
     end
-  end
-
-  def index
-    @users = User.all
   end
 
   private

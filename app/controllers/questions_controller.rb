@@ -24,6 +24,10 @@ class QuestionsController < ApplicationController
     @question = Question.new
   end
 
+  def edit
+    @question = current_user.questions.find(params[:id])
+  end
+
   # rubocop:disable Metrics/AbcSize
   def create
     @question = current_user.questions.build(question_params)
@@ -38,10 +42,6 @@ class QuestionsController < ApplicationController
     end
   end
   # rubocop:enable Metrics/AbcSize
-
-  def edit
-    @question = current_user.questions.find(params[:id])
-  end
 
   def update
     @question = current_user.questions.find(params[:id])
