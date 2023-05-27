@@ -33,6 +33,3 @@ Naming/PredicateName:
 
 Style/FrozenStringLiteralComment:
   Enabled: false
-
-Rails/I18nLocaleTexts:
-  Enabled: false
