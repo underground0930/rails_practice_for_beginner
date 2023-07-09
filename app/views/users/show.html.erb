@@ -1,0 +1,19 @@
+<div class="container">
+  <div style="width:400px; display:flex; margin: 40px auto 0;">
+    <div>
+      <%= gravatar_for @user %>  
+    </div>
+    <dl>
+      <dt>name:</dt>
+      <dd><%= @user.name %></dd>
+      <dt>email:</dt>
+      <dd><%= @user.email %></dd>
+      <dt>profile:</dt>
+      <dd><%= @user.profile %></dd>
+    </dl>
+  </div>
+  <hr>
+  <div class="text-center">
+    <%= link_to "トップページへ戻る", root_path %>
+  </div>
+</div>
