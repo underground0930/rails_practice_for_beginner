@@ -1,5 +1,5 @@
 <li class="media mb-3 border-bottom pb-3">
-  <%= image_tag 'https://placehold.jp/64x64.png', class: 'mr-3 rounded-circle' %>
+  <%= gravatar_for question.user %>
   <div class="media-body">
     <div class="d-flex">
       <h5 class="mt-0 mb-1 mr-3"><%= link_to question.title, question_path(question) %></h5>
