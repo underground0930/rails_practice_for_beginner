@@ -1,1 +1,9 @@
-<li><%= user.name %></li>
+<li style="display:flex; align-items:center; border-bottom:1px solid #ccc; padding: 5px;">
+  <div>
+    <%= gravatar_for user %>  
+  </div>
+  <div>
+    <%= link_to user.name, user_path(user)  %>  
+  </div>
+</li>
+

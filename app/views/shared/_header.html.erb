@@ -14,7 +14,7 @@
           <%= link_to 'ログアウト', logout_path, class: 'nav-link', method: :delete, data: { confirm: 'ログアウトしますか' } %>
         </li>
         <li class="nav-item">
-          <span class="nav-link"><%= current_user.name %></span>
+          <%= link_to current_user.name, user_path(current_user), class: 'nav-link' %>
         </li>
       <% else %>
         <li class="nav-item">
