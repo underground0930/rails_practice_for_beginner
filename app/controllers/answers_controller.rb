@@ -1,8 +1,8 @@
 class AnswersController < ApplicationController
 
   def edit
-    @question = current_user.questions.find_by(id: params[:question_id])
-    @answer = current_user.answers.find_by(id: params[:id])
+    @question = current_user.questions.find(params[:question_id])
+    @answer = current_user.answers.find(params[:id])
   end
 
   def update
