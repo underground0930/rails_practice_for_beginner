@@ -8,6 +8,7 @@
       <div class="text-right">
         <% if current_user&.mine?(answer) %>
           <div>
+            <%= link_to '編集', edit_question_answer_path(answer.question, answer), class: 'btn btn-success btn-sm' %>
             <%= link_to '削除', question_answer_path(answer.question, answer), class: 'btn btn-danger btn-sm', data: { confirm: '削除しますか' }, method: :delete %>
           </div>
         <% end %>

@@ -14,7 +14,7 @@ Rails.application.routes.draw do
     member do
       post :solve
     end
-    resources :answers, only: [:create, :destroy]
+    resources :answers, only: [:create, :destroy, :edit, :update]
   end
 
   resources :users, only: [:index]
