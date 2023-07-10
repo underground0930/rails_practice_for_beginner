@@ -20,13 +20,13 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User.find_by(id:params[:id])
+    @user = User.find(params[:id])
   end
 
   def edit; end
 
   def update
-    @user = User.find_by(id:params[:id])
+    @user = User.find(params[:id])
     if @user.update(user_params)
       redirect_to user_path(@user), success: "更新に成功しました"
     else
