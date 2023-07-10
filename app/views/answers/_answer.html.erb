@@ -1,5 +1,12 @@
 <li class="media mb-3 border-bottom pb-3" id="<%= dom_id(answer) %>">
-  <%= image_tag 'https://placehold.jp/64x64.png', class: 'mr-3 rounded-circle' %>
+  <div>
+    <div>
+      <%= gravatar_for answer.user %>      
+    </div>
+    <div class="text-center">
+      <%= link_to answer.user.name, user_path(answer.user)  %>    
+    </div>  
+  </div>
   <div class="media-body">
     <div class="d-flex flex-column justify-content-between">
       <div>
@@ -13,10 +20,6 @@
         <% end %>
         <span class="small text-muted"><%= l answer.created_at, format: :long %></span>
       </div>
-
-
     </div>
-
-
   </div>
 </li>
